@@ -2,6 +2,8 @@ package tn.api.omar.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,6 +12,7 @@ import javax.persistence.Table;
 public class Subject {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="subid")
 	private Integer subid;
 	
@@ -21,6 +24,12 @@ public class Subject {
 	
 	public Subject(String subname) {
 		super();
+		this.subname = subname;
+	}
+
+	public Subject(Integer subid, String subname) {
+		super();
+		this.subid = subid;
 		this.subname = subname;
 	}
 

@@ -2,6 +2,8 @@ package tn.api.omar.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,8 +12,17 @@ import javax.persistence.Table;
 public class Professor {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "pid")
 	private Integer pid;
+
+	public Professor(Integer pid, String pfname, String plname, String pmail) {
+		super();
+		this.pid = pid;
+		this.pfname = pfname;
+		this.plname = plname;
+		this.pmail = pmail;
+	}
 
 	@Column(name = "pfname")
 	private String pfname;
