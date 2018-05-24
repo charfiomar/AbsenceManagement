@@ -62,7 +62,7 @@ public class ClassroomDAO {
 			HibernateUtils.session.get().close();
 		}
 	}
-	public static void deleteSubject(Classroom obj) {
+	public static void deleteClassroom(Classroom obj) {
 		Transaction t = null;
 		try {
 			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());

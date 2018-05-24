@@ -12,9 +12,15 @@ import javax.persistence.Table;
 public class Classroom {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "crid")
 	private Integer crid;
+
+	@Column(name = "crname")
+	private String crname;
+
+	public Classroom() {
+	}
 
 	public Classroom(Integer crid, String crname) {
 		super();
@@ -22,12 +28,6 @@ public class Classroom {
 		this.crname = crname;
 	}
 
-	@Column(name = "crname")
-	private String crname;
-	
-	public Classroom() {
-	}
-	
 	public Classroom(String crname) {
 		super();
 		this.crname = crname;
@@ -48,7 +48,7 @@ public class Classroom {
 	public void setCrname(String crname) {
 		this.crname = crname;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Classroom [crid=" + crid + ", crname=" + crname + "]";

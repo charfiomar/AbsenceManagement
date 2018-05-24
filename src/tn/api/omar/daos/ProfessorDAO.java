@@ -6,41 +6,41 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Transaction;
 
-import tn.api.omar.entities.Classroom;
 import tn.api.omar.entities.Professor;
 import tn.api.omar.utils.HibernateUtils;
 
 public class ProfessorDAO {
 
 	@SuppressWarnings("unchecked")
-	public static List<Professor> listProfessors(){
+	public static List<Professor> listProfessors() {
 		List<Professor> list = null;
-		try{
+		try {
 			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
 			Query query = HibernateUtils.session.get().createQuery("from Professor");
 			list = (List<Professor>) query.list();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return new ArrayList<>();
-		}finally {
+		} finally {
 			HibernateUtils.session.get().close();
 		}
 		return list;
 	}
-	
-	public static Professor listProfessor(Integer id){
+
+	public static Professor listProfessor(Integer id) {
 		Professor p = null;
-		try{
+		try {
 			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
 			p = (Professor) HibernateUtils.session.get().get(Professor.class, id);
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return new Professor();
-		}finally {
+		} finally {
 			HibernateUtils.session.get().close();
 		}
 		return p;
 	}
+
 	public static void addProfessor(Professor obj) {
 		Transaction t = null;
 		try {
@@ -58,13 +58,13 @@ public class ProfessorDAO {
 			HibernateUtils.session.get().close();
 		}
 	}
-	
+
 	public static void editProfessor(Professor obj) {
 		Transaction t = null;
 		try {
 			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
 			t = HibernateUtils.session.get().beginTransaction();
-			Professor prof = (Professor)HibernateUtils.session.get().load(Professor.class,new Integer(obj.getPid()));
+			Professor prof = (Professor) HibernateUtils.session.get().load(Professor.class, new Integer(obj.getPid()));
 			prof.setPfname(obj.getPfname());
 			prof.setPlname(obj.getPlname());
 			prof.setPmail(obj.getPmail());
@@ -78,12 +78,13 @@ public class ProfessorDAO {
 			HibernateUtils.session.get().close();
 		}
 	}
-	public static void deleteSubject(Professor obj) {
+
+	public static void deleteProfessor(Professor obj) {
 		Transaction t = null;
 		try {
 			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
 			t = HibernateUtils.session.get().beginTransaction();
-			Professor prof = (Professor)HibernateUtils.session.get().load(Professor.class,new Integer(obj.getPid()));
+			Professor prof = (Professor) HibernateUtils.session.get().load(Professor.class, new Integer(obj.getPid()));
 			HibernateUtils.session.get().delete(prof);
 			t.commit();
 		} catch (Exception e) {

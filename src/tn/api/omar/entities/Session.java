@@ -13,17 +13,9 @@ import java.sql.Time;
 public class Session {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "sid")
 	private Integer sid;
-
-	public Session(Integer sid, Time startTime, Time endTime, String day) {
-		super();
-		this.sid = sid;
-		this.startTime = startTime;
-		this.endTime = endTime;
-		this.day = day;
-	}
 
 	@Column(name = "startTime")
 	private Time startTime;
@@ -35,6 +27,14 @@ public class Session {
 	private String day;
 
 	public Session() {
+	}
+
+	public Session(Integer sid, Time startTime, Time endTime, String day) {
+		super();
+		this.sid = sid;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.day = day;
 	}
 
 	public Session(Time startTime, Time endTime, String day) {
@@ -80,6 +80,5 @@ public class Session {
 	public String toString() {
 		return "Session [sid=" + sid + ", startTime=" + startTime + ", endTime=" + endTime + ", day=" + day + "]";
 	}
-	
-	
+
 }

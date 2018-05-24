@@ -5,8 +5,6 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
 import tn.api.omar.entities.embeddable.CourseSessionEmbeddedPK;
@@ -22,7 +20,6 @@ public class CourseSession {
 			@AttributeOverride(name = "sid", column = @Column(name = "sid")) })
 	private CourseSessionEmbeddedPK csid;
 
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "subid")
 	private Integer subid;
 
@@ -31,6 +28,19 @@ public class CourseSession {
 
 	public CourseSession(Integer subid) {
 		super();
+		this.subid = subid;
+	}
+	
+	public CourseSession(CourseSessionEmbeddedPK pk,Integer subid) {
+		super();
+		this.csid = pk;
+		this.subid = subid;
+	}
+	
+	public CourseSession(Integer pid,Integer gid,Integer crid,Integer sid,Integer subid) {
+		super();
+		CourseSessionEmbeddedPK pk = new CourseSessionEmbeddedPK(pid, gid, crid, sid);
+		this.csid = pk;
 		this.subid = subid;
 	}
 

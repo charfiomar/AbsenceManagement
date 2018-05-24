@@ -8,26 +8,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Speciality")
+@Table(name = "Speciality")
 public class Speciality {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="spid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "spid")
 	private Integer spid;
-	
+
+	@Column(name = "spname")
+	private String spname;
+
+	public Speciality() {
+	}
+
 	public Speciality(Integer spid, String spname) {
 		super();
 		this.spid = spid;
 		this.spname = spname;
 	}
 
-	@Column(name="spname")
-	private String spname;
-	
-	public Speciality() {
-	}
-	
 	public Speciality(String spname) {
 		super();
 		this.spname = spname;
@@ -53,5 +53,5 @@ public class Speciality {
 	public String toString() {
 		return "Speciality [spid=" + spid + ", spname=" + spname + "]";
 	}
-	
+
 }

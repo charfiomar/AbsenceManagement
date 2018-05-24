@@ -12,17 +12,9 @@ import javax.persistence.Table;
 public class Professor {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "pid")
 	private Integer pid;
-
-	public Professor(Integer pid, String pfname, String plname, String pmail) {
-		super();
-		this.pid = pid;
-		this.pfname = pfname;
-		this.plname = plname;
-		this.pmail = pmail;
-	}
 
 	@Column(name = "pfname")
 	private String pfname;
@@ -34,6 +26,14 @@ public class Professor {
 	private String pmail;
 
 	public Professor() {
+	}
+
+	public Professor(Integer pid, String pfname, String plname, String pmail) {
+		super();
+		this.pid = pid;
+		this.pfname = pfname;
+		this.plname = plname;
+		this.pmail = pmail;
 	}
 
 	public Professor(String pfname, String plname, String pmail) {
@@ -80,5 +80,4 @@ public class Professor {
 		return "Professor [pid=" + pid + ", pfname=" + pfname + ", plname=" + plname + ", pmail=" + pmail + "]";
 	}
 
-	
 }

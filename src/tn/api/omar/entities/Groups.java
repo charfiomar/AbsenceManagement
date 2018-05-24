@@ -11,14 +11,7 @@ import javax.persistence.Table;
 @Table(name = "Groups")
 public class Groups {
 
-	public Groups(Integer gid, Integer gnumber, Integer gyear, String gmail, Integer spid) {
-		super();
-		this.gid = gid;
-		this.gnumber = gnumber;
-		this.gyear = gyear;
-		this.gmail = gmail;
-		this.spid = spid;
-	}
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +33,15 @@ public class Groups {
 	public Groups() {
 	}
 
+	public Groups(Integer gid, Integer gnumber, Integer gyear, String gmail, Integer spid) {
+		super();
+		this.gid = gid;
+		this.gnumber = gnumber;
+		this.gyear = gyear;
+		this.gmail = gmail;
+		this.spid = spid;
+	}
+	
 	public Groups(Integer gnumber, Integer gyear, String gmail, Integer spid) {
 		super();
 		this.gnumber = gnumber;

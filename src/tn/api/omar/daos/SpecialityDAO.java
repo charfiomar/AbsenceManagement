@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Transaction;
 
-import tn.api.omar.entities.Session;
 import tn.api.omar.entities.Speciality;
 import tn.api.omar.utils.HibernateUtils;
 

@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Transaction;
 
-import tn.api.omar.entities.Classroom;
 import tn.api.omar.entities.Groups;
 import tn.api.omar.utils.HibernateUtils;
 
@@ -28,7 +27,7 @@ public class GroupDAO {
 		return list;
 	}
 	
-	public static void addGroup(Groups obj) {
+	public static void addGroups(Groups obj) {
 		Transaction t = null;
 		try {
 			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
@@ -66,13 +65,13 @@ public class GroupDAO {
 			HibernateUtils.session.get().close();
 		}
 	}
-	public static void deleteSubject(Classroom obj) {
+	public static void deleteGroups(Groups obj) {
 		Transaction t = null;
 		try {
 			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
 			t = HibernateUtils.session.get().beginTransaction();
-			Classroom cla = (Classroom)HibernateUtils.session.get().load(Classroom.class,new Integer(obj.getCrid()));
-			HibernateUtils.session.get().delete(cla);
+			Groups grp = (Groups)HibernateUtils.session.get().load(Groups.class,new Integer(obj.getGid()));
+			HibernateUtils.session.get().delete(grp);
 			t.commit();
 		} catch (Exception e) {
 			if (t != null) {

@@ -3,8 +3,6 @@ package tn.api.omar.daos;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.websocket.Session;
-
 import org.hibernate.Query;
 import org.hibernate.Transaction;
 

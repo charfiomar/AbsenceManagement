@@ -6,27 +6,27 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Transaction;
 
-import tn.api.omar.entities.Professor;
 import tn.api.omar.entities.Session;
 import tn.api.omar.utils.HibernateUtils;
 
 public class SessionDAO {
 
 	@SuppressWarnings("unchecked")
-	public static List<Session> listSessions(){
+	public static List<Session> listSessions() {
 		List<Session> list = null;
-		try{
+		try {
 			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
 			Query query = HibernateUtils.session.get().createQuery("from Session");
 			list = (List<Session>) query.list();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return new ArrayList<>();
-		}finally {
+		} finally {
 			HibernateUtils.session.get().close();
 		}
 		return list;
 	}
+
 	public static void addSession(Session obj) {
 		Transaction t = null;
 		try {
@@ -44,13 +44,13 @@ public class SessionDAO {
 			HibernateUtils.session.get().close();
 		}
 	}
-	
+
 	public static void editSession(Session obj) {
 		Transaction t = null;
 		try {
 			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
 			t = HibernateUtils.session.get().beginTransaction();
-			Session sess = (Session)HibernateUtils.session.get().load(Session.class,new Integer(obj.getSid()));
+			Session sess = (Session) HibernateUtils.session.get().load(Session.class, new Integer(obj.getSid()));
 			sess.setDay(obj.getDay());
 			sess.setStartTime(obj.getStartTime());
 			sess.setEndTime(obj.getEndTime());
@@ -64,12 +64,13 @@ public class SessionDAO {
 			HibernateUtils.session.get().close();
 		}
 	}
+
 	public static void deleteSession(Session obj) {
 		Transaction t = null;
 		try {
 			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
 			t = HibernateUtils.session.get().beginTransaction();
-			Session sess = (Session)HibernateUtils.session.get().load(Session.class,new Integer(obj.getSid()));
+			Session sess = (Session) HibernateUtils.session.get().load(Session.class, new Integer(obj.getSid()));
 			HibernateUtils.session.get().delete(sess);
 			t.commit();
 		} catch (Exception e) {
@@ -81,5 +82,5 @@ public class SessionDAO {
 			HibernateUtils.session.get().close();
 		}
 	}
-	
+
 }
