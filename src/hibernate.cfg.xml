@@ -17,5 +17,7 @@
 		<mapping class="tn.api.omar.entities.Session" />
 		<mapping class="tn.api.omar.entities.Speciality" />
 		<mapping class="tn.api.omar.entities.Subject" />
+		<mapping class="tn.api.omar.users.model.User" />
+		<mapping class="tn.api.omar.users.model.UserRole" />
 	</session-factory>
 </hibernate-configuration>

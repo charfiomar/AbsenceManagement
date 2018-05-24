@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.hibernate.Query;
 
+import tn.api.omar.config.HibernateUtils;
 import tn.api.omar.entities.Subject;
-import tn.api.omar.utils.HibernateUtils;
 
 public class SubjectDAO {
 

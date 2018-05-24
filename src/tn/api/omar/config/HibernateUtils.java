@@ -1,4 +1,4 @@
-package tn.api.omar.utils;
+package tn.api.omar.config;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

@@ -26,20 +26,45 @@
 		</plugins>
 	</build>
 	<dependencies>
+		<!-- Spring 3 dependencies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>4.3.17.RELEASE</version>
+		</dependency>
+		<!-- Spring MVC -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>4.3.17.RELEASE</version>
+		</dependency>
+		<!-- Spring + aspects -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>4.3.17.RELEASE</version>
+		</dependency>
+		<!-- ORM integration, e.g Hibernate -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>4.3.17.RELEASE</version>
+		</dependency>
+		<!-- SpringSecurity 4.0.4 RELEASE -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>4.0.4.RELEASE</version>
+			<version>4.2.6.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>4.0.4.RELEASE</version>
+			<version>4.2.6.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
-			<version>4.0.4.RELEASE</version>
+			<version>4.2.6.RELEASE</version>
 		</dependency>
 		<!-- Hibernate 4.3.6 Final -->
 		<dependency>
@@ -47,11 +72,23 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>4.3.6.Final</version>
 		</dependency>
-		<!-- Mysql Connector -->
+		<!-- Mysql Connector 5.1.21 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.21</version>
+		</dependency>
+		<!-- JSTL -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
