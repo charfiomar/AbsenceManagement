@@ -10,13 +10,13 @@
 <title>Hello</title>
 </head>
 <body>
-	<h1>Title : ${title}</h1>
-	<h1>Message : ${message}</h1>
+	<h1>URI : ${uri}</h1>
+	<h1>User : ${user}</h1>
+	<h1>Role : ${roles}</h1>
 
-	<sec:authorize access="hasRole('USER')">
+	<sec:authorize access="hasAuthority('USER')">
 		<!-- For login user -->
-		<c:url value="/logout" var="logoutUrl" />
-		<form action="${logoutUrl}" method="post" id="logoutForm">
+		<form action="<c:url value="/logout"/>" method="post" id="logoutForm">
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 		</form>

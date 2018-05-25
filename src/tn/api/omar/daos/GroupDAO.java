@@ -12,25 +12,23 @@ import tn.api.omar.entities.Groups;
 public class GroupDAO {
 
 	@SuppressWarnings("unchecked")
-	public static List<Groups> listGroups(){
+	public static List<Groups> listGroups() {
 		List<Groups> list = null;
-		try{
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+		try {
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			Query query = HibernateUtils.session.get().createQuery("from Groups");
 			list = (List<Groups>) query.list();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return new ArrayList<>();
-		}finally {
-			HibernateUtils.session.get().close();
 		}
 		return list;
 	}
-	
+
 	public static void addGroups(Groups obj) {
 		Transaction t = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			t = HibernateUtils.session.get().beginTransaction();
 			HibernateUtils.session.get().save(obj);
 			HibernateUtils.session.get().flush();
@@ -40,17 +38,15 @@ public class GroupDAO {
 				t.rollback();
 			}
 			e.printStackTrace();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 	}
-	
+
 	public static void editGroups(Groups obj) {
 		Transaction t = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			t = HibernateUtils.session.get().beginTransaction();
-			Groups grp = (Groups)HibernateUtils.session.get().load(Groups.class,new Integer(obj.getGid()));
+			Groups grp = (Groups) HibernateUtils.session.get().load(Groups.class, new Integer(obj.getGid()));
 			grp.setGnumber(obj.getGnumber());
 			grp.setGyear(obj.getGyear());
 			grp.setGmail(obj.getGmail());
@@ -61,16 +57,15 @@ public class GroupDAO {
 				t.rollback();
 			}
 			e.printStackTrace();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 	}
+
 	public static void deleteGroups(Groups obj) {
 		Transaction t = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			t = HibernateUtils.session.get().beginTransaction();
-			Groups grp = (Groups)HibernateUtils.session.get().load(Groups.class,new Integer(obj.getGid()));
+			Groups grp = (Groups) HibernateUtils.session.get().load(Groups.class, new Integer(obj.getGid()));
 			HibernateUtils.session.get().delete(grp);
 			t.commit();
 		} catch (Exception e) {
@@ -78,9 +73,7 @@ public class GroupDAO {
 				t.rollback();
 			}
 			e.printStackTrace();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 	}
-	
+
 }

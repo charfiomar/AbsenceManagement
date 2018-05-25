@@ -15,14 +15,14 @@ public class ProfessorDAO {
 	public static List<Professor> listProfessors() {
 		List<Professor> list = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			Query query = HibernateUtils.session.get().createQuery("from Professor");
 			list = (List<Professor>) query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ArrayList<>();
 		} finally {
-			HibernateUtils.session.get().close();
+
 		}
 		return list;
 	}
@@ -30,13 +30,11 @@ public class ProfessorDAO {
 	public static Professor listProfessor(Integer id) {
 		Professor p = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			p = (Professor) HibernateUtils.session.get().get(Professor.class, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new Professor();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 		return p;
 	}
@@ -44,7 +42,7 @@ public class ProfessorDAO {
 	public static void addProfessor(Professor obj) {
 		Transaction t = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			t = HibernateUtils.session.get().beginTransaction();
 			HibernateUtils.session.get().save(obj);
 			HibernateUtils.session.get().flush();
@@ -54,15 +52,13 @@ public class ProfessorDAO {
 				t.rollback();
 			}
 			e.printStackTrace();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 	}
 
 	public static void editProfessor(Professor obj) {
 		Transaction t = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			t = HibernateUtils.session.get().beginTransaction();
 			Professor prof = (Professor) HibernateUtils.session.get().load(Professor.class, new Integer(obj.getPid()));
 			prof.setPfname(obj.getPfname());
@@ -74,15 +70,13 @@ public class ProfessorDAO {
 				t.rollback();
 			}
 			e.printStackTrace();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 	}
 
 	public static void deleteProfessor(Professor obj) {
 		Transaction t = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			t = HibernateUtils.session.get().beginTransaction();
 			Professor prof = (Professor) HibernateUtils.session.get().load(Professor.class, new Integer(obj.getPid()));
 			HibernateUtils.session.get().delete(prof);
@@ -92,8 +86,6 @@ public class ProfessorDAO {
 				t.rollback();
 			}
 			e.printStackTrace();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 	}
 }

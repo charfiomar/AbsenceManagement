@@ -20,6 +20,9 @@
 				Username : ${username} <br />You do not have permission to access
 				this page!
 			</h2>
+			<h2>
+				Your role(s) : ${auths} <br />
+			</h2>
 		</c:otherwise>
 	</c:choose>
 </body>

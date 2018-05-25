@@ -14,7 +14,14 @@
 	<div class="container sga-login">
 		<div class="row align-items-center">
 			<div class="col col-lg-12">
-				<form class="form-signin" action="<c:url value='/index' />" method="post">
+				<c:if test="${not empty error}">
+					<div class="alert alert-danger">${error}</div>
+				</c:if>
+				<c:if test="${not empty msg}">
+					<div class="alert alert-success">${msg}</div>
+				</c:if>
+				<form class="form-signin" action="<c:url value='/index' />"
+					method="post">
 					<h2 class="form-signin-heading">Connectez-vous SVP</h2>
 					<label for="inputEmail" class="sr-only">Adresse E-mail</label><input
 						type="text" id="inputEmail" class="form-control"
@@ -26,12 +33,6 @@
 					<button class="btn btn-lg btn-dark btn-outline-secondary btn-block"
 						type="submit">Se connecter</button>
 				</form>
-				<c:if test="${not empty error}">
-					<div class="error">${error}</div>
-				</c:if>
-				<c:if test="${not empty msg}">
-					<div class="msg">${msg}</div>
-				</c:if>
 			</div>
 		</div>
 	</div>

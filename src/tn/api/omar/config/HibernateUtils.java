@@ -28,6 +28,7 @@ public class HibernateUtils {
 			throw new ExceptionInInitializerError(e);
 		} finally {
 			SESSION_FACTORY = auxSessionFactory;
+			session.set(SESSION_FACTORY.openSession());
 		}
 	}
 

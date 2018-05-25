@@ -1,12 +1,15 @@
 package tn.api.omar.controllers;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,7 +37,16 @@ public class MainController {
 
 	}
 	
-	@RequestMapping(value = { "/**" }, method = RequestMethod.GET)
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    if (auth != null){    
+	        new SecurityContextLogoutHandler().logout(request, response, auth);
+	    }
+	    return "redirect:/index?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
+	}
+	
+	@RequestMapping(value = { "/hello" }, method = RequestMethod.GET)
 	public ModelAndView welcome(HttpServletRequest request) {
 
 		Authentication auth = SecurityContextHolder.getContext()
@@ -44,7 +56,7 @@ public class MainController {
 		model.addObject("user", auth.getName());
 		model.addObject("roles", auth.getAuthorities());
 		
-		model.setViewName("welcome");
+		model.setViewName("hello");
 
 		return model;
 
@@ -64,6 +76,7 @@ public class MainController {
 			System.out.println(userDetail);
 
 			model.addObject("username", userDetail.getUsername());
+			model.addObject("auths", userDetail.getAuthorities());
 
 		}
 

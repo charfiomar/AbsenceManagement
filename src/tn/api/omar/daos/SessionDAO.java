@@ -15,14 +15,12 @@ public class SessionDAO {
 	public static List<Session> listSessions() {
 		List<Session> list = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			Query query = HibernateUtils.session.get().createQuery("from Session");
 			list = (List<Session>) query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ArrayList<>();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 		return list;
 	}
@@ -30,7 +28,7 @@ public class SessionDAO {
 	public static void addSession(Session obj) {
 		Transaction t = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			t = HibernateUtils.session.get().beginTransaction();
 			HibernateUtils.session.get().save(obj);
 			HibernateUtils.session.get().flush();
@@ -40,15 +38,13 @@ public class SessionDAO {
 				t.rollback();
 			}
 			e.printStackTrace();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 	}
 
 	public static void editSession(Session obj) {
 		Transaction t = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			t = HibernateUtils.session.get().beginTransaction();
 			Session sess = (Session) HibernateUtils.session.get().load(Session.class, new Integer(obj.getSid()));
 			sess.setDay(obj.getDay());
@@ -60,15 +56,13 @@ public class SessionDAO {
 				t.rollback();
 			}
 			e.printStackTrace();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 	}
 
 	public static void deleteSession(Session obj) {
 		Transaction t = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			t = HibernateUtils.session.get().beginTransaction();
 			Session sess = (Session) HibernateUtils.session.get().load(Session.class, new Integer(obj.getSid()));
 			HibernateUtils.session.get().delete(sess);
@@ -78,8 +72,6 @@ public class SessionDAO {
 				t.rollback();
 			}
 			e.printStackTrace();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 	}
 

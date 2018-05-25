@@ -15,22 +15,20 @@ public class ClassroomDAO {
 	public static List<Classroom> listClassrooms() {
 		List<Classroom> list = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			Query query = HibernateUtils.session.get().createQuery("from Classroom");
 			list = (List<Classroom>) query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ArrayList<>();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 		return list;
 	}
-	
+
 	public static void addClassroom(Classroom obj) {
 		Transaction t = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			t = HibernateUtils.session.get().beginTransaction();
 			HibernateUtils.session.get().save(obj);
 			HibernateUtils.session.get().flush();
@@ -40,17 +38,15 @@ public class ClassroomDAO {
 				t.rollback();
 			}
 			e.printStackTrace();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 	}
-	
+
 	public static void editClassroom(Classroom obj) {
 		Transaction t = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			t = HibernateUtils.session.get().beginTransaction();
-			Classroom cla = (Classroom)HibernateUtils.session.get().load(Classroom.class,new Integer(obj.getCrid()));
+			Classroom cla = (Classroom) HibernateUtils.session.get().load(Classroom.class, new Integer(obj.getCrid()));
 			cla.setCrname(obj.getCrname());
 			t.commit();
 		} catch (Exception e) {
@@ -58,16 +54,15 @@ public class ClassroomDAO {
 				t.rollback();
 			}
 			e.printStackTrace();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 	}
+
 	public static void deleteClassroom(Classroom obj) {
 		Transaction t = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			t = HibernateUtils.session.get().beginTransaction();
-			Classroom cla = (Classroom)HibernateUtils.session.get().load(Classroom.class,new Integer(obj.getCrid()));
+			Classroom cla = (Classroom) HibernateUtils.session.get().load(Classroom.class, new Integer(obj.getCrid()));
 			HibernateUtils.session.get().delete(cla);
 			t.commit();
 		} catch (Exception e) {
@@ -75,9 +70,7 @@ public class ClassroomDAO {
 				t.rollback();
 			}
 			e.printStackTrace();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 	}
-	
+
 }

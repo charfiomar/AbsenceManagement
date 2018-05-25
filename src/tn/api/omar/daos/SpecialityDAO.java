@@ -15,14 +15,12 @@ public class SpecialityDAO {
 	public static List<Speciality> listSpecialities() {
 		List<Speciality> list = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			Query query = HibernateUtils.session.get().createQuery("from Speciality");
 			list = (List<Speciality>) query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ArrayList<>();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 		return list;
 	}
@@ -30,7 +28,7 @@ public class SpecialityDAO {
 	public static void addSpeciality(Speciality obj) {
 		Transaction t = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			t = HibernateUtils.session.get().beginTransaction();
 			HibernateUtils.session.get().save(obj);
 			HibernateUtils.session.get().flush();
@@ -40,15 +38,13 @@ public class SpecialityDAO {
 				t.rollback();
 			}
 			e.printStackTrace();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 	}
 
 	public static void editSpeciality(Speciality obj) {
 		Transaction t = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			t = HibernateUtils.session.get().beginTransaction();
 			Speciality spec = (Speciality) HibernateUtils.session.get().load(Speciality.class,
 					new Integer(obj.getSpid()));
@@ -60,15 +56,13 @@ public class SpecialityDAO {
 				t.rollback();
 			}
 			e.printStackTrace();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 	}
 
 	public static void deleteSpeciality(Speciality obj) {
 		Transaction t = null;
 		try {
-			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.openSession());
+			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			t = HibernateUtils.session.get().beginTransaction();
 			Speciality spec = (Speciality) HibernateUtils.session.get().load(Speciality.class, new Integer(obj.getSpid()));
 			HibernateUtils.session.get().delete(spec);
@@ -78,8 +72,6 @@ public class SpecialityDAO {
 				t.rollback();
 			}
 			e.printStackTrace();
-		} finally {
-			HibernateUtils.session.get().close();
 		}
 	}
 }
