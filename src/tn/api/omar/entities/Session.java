@@ -2,6 +2,8 @@ package tn.api.omar.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Time;
@@ -11,6 +13,7 @@ import java.sql.Time;
 public class Session {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "sid")
 	private Integer sid;
 
@@ -24,6 +27,14 @@ public class Session {
 	private String day;
 
 	public Session() {
+	}
+
+	public Session(Integer sid, Time startTime, Time endTime, String day) {
+		super();
+		this.sid = sid;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.day = day;
 	}
 
 	public Session(Time startTime, Time endTime, String day) {
@@ -69,6 +80,5 @@ public class Session {
 	public String toString() {
 		return "Session [sid=" + sid + ", startTime=" + startTime + ", endTime=" + endTime + ", day=" + day + "]";
 	}
-	
-	
+
 }

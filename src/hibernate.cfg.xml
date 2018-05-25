@@ -5,9 +5,9 @@
 	<session-factory>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://omar-api.tn/AbsenceManagement</property>
-		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">Omar180794</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/AbsenceManagement</property>
+		<property name="hibernate.connection.username">phpmyadmin</property>
+		<property name="hibernate.connection.password">0000</property>
 		<property name="show_sql">true</property>
 		<property name="hbm2ddl.auto">update</property>
 		<mapping class="tn.api.omar.entities.Professor" />

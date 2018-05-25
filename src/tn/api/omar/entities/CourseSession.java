@@ -30,6 +30,19 @@ public class CourseSession {
 		super();
 		this.subid = subid;
 	}
+	
+	public CourseSession(CourseSessionEmbeddedPK pk,Integer subid) {
+		super();
+		this.csid = pk;
+		this.subid = subid;
+	}
+	
+	public CourseSession(Integer pid,Integer gid,Integer crid,Integer sid,Integer subid) {
+		super();
+		CourseSessionEmbeddedPK pk = new CourseSessionEmbeddedPK(pid, gid, crid, sid);
+		this.csid = pk;
+		this.subid = subid;
+	}
 
 	public CourseSessionEmbeddedPK getCsid() {
 		return csid;
