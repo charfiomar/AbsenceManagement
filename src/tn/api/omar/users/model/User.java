@@ -16,16 +16,9 @@ public class User implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "username")
 	private String username;
-
-	@Column(name = "password")
 	private String password;
-
-	@Column(name = "enabled")
 	private boolean enabled;
-	
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
 
 	public User() {
@@ -44,6 +37,8 @@ public class User implements Serializable{
 		this.userRole = userRole;
 	}
 
+	@Id
+	@Column(name = "username")
 	public String getUsername() {
 		return this.username;
 	}
@@ -52,6 +47,7 @@ public class User implements Serializable{
 		this.username = username;
 	}
 
+	@Column(name = "password")
 	public String getPassword() {
 		return this.password;
 	}
@@ -59,7 +55,8 @@ public class User implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	@Column(name = "enabled")
 	public boolean isEnabled() {
 		return this.enabled;
 	}

@@ -16,20 +16,12 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "UserRoles", uniqueConstraints = @UniqueConstraint(columnNames = { "role", "username" }))
-public class UserRole implements Serializable{
+public class UserRole implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "urid")
 	private Integer userRoleId;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "username", nullable = false)
 	private User user;
-	
-	@Column(name = "role")
 	private String role;
 
 	public UserRole() {
@@ -40,6 +32,9 @@ public class UserRole implements Serializable{
 		this.role = role;
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "urid")
 	public Integer getUserRoleId() {
 		return this.userRoleId;
 	}
@@ -48,6 +43,8 @@ public class UserRole implements Serializable{
 		this.userRoleId = userRoleId;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "username", nullable = false)
 	public User getUser() {
 		return this.user;
 	}
@@ -56,6 +53,7 @@ public class UserRole implements Serializable{
 		this.user = user;
 	}
 
+	@Column(name = "role")
 	public String getRole() {
 		return this.role;
 	}

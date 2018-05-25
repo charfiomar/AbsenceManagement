@@ -33,6 +33,22 @@ public class MainController {
 		return model;
 
 	}
+	
+	@RequestMapping(value = { "/**" }, method = RequestMethod.GET)
+	public ModelAndView welcome(HttpServletRequest request) {
+
+		Authentication auth = SecurityContextHolder.getContext()
+												   .getAuthentication();
+		ModelAndView model = new ModelAndView();
+		model.addObject("uri", request.getRequestURI());
+		model.addObject("user", auth.getName());
+		model.addObject("roles", auth.getAuthorities());
+		
+		model.setViewName("welcome");
+
+		return model;
+
+	}
 
 	// for 403 access denied page
 	@RequestMapping(value = "/403", method = RequestMethod.GET)

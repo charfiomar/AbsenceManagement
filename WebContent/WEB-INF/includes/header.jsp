@@ -1,6 +1,6 @@
 <header class="sga-header sticky-top">
 	<nav class="navbar navbar-expand-lg navbar-dark">
-		<a class="navbar-brand" href="#"><img src="assets/img/logo.png"
+		<a class="navbar-brand" href="#"><img src="https://image.ibb.co/kLkOqo/logo.png"
 			width="30" height="30" class="d-inline-block align-top"
 			alt="Système de gestion des absences"
 			title="Système de gestion des absences"></a>
