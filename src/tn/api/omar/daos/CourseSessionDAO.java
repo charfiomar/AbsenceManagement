@@ -18,8 +18,10 @@ public class CourseSessionDAO {
 		List<CourseSession> list = null;
 		try {
 			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
+			HibernateUtils.session.get().beginTransaction();
 			Query query = HibernateUtils.session.get().createQuery("from CourseSession");
 			list = (List<CourseSession>) query.list();
+			HibernateUtils.session.get().getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ArrayList<>();

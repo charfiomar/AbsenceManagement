@@ -21,8 +21,11 @@
 				this page!
 			</h2>
 			<h2>
-				Your role(s) : ${auths} <br />
+				Your role(s) : ${auths} : you can only see the dashboard<br />
 			</h2>
+			<h4>
+				<a href="<c:url value='/dashboard'/>">Back to dashboard</a><br />
+			</h4>
 		</c:otherwise>
 	</c:choose>
 </body>

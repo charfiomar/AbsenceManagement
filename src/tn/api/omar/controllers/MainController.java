@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController {
 
-	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/index" }, method = RequestMethod.GET)
 	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout, HttpServletRequest request) {
 
@@ -29,34 +29,34 @@ public class MainController {
 		}
 
 		if (logout != null) {
-			model.addObject("msg", "You've been logged out successfully.");
+			model.addObject("msg", "Vous avez été déconnecté avec succes.");
 		}
 		model.setViewName("index");
 
 		return model;
 
 	}
-	
-	@RequestMapping(value="/logout", method = RequestMethod.GET)
-	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
-	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    if (auth != null){    
-	        new SecurityContextLogoutHandler().logout(request, response, auth);
-	    }
-	    return "redirect:/index?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
+		return "redirect:/index?logout";
 	}
-	
-	@RequestMapping(value = { "/hello" }, method = RequestMethod.GET)
+
+	@RequestMapping(value = { "/dashboard" }, method = RequestMethod.GET)
 	public ModelAndView welcome(HttpServletRequest request) {
 
-		Authentication auth = SecurityContextHolder.getContext()
-												   .getAuthentication();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		request.getSession().setAttribute("userName", auth.getName());
+		request.getSession().setAttribute("userAuth", auth.getAuthorities());
 		ModelAndView model = new ModelAndView();
-		model.addObject("uri", request.getRequestURI());
 		model.addObject("user", auth.getName());
 		model.addObject("roles", auth.getAuthorities());
-		
-		model.setViewName("hello");
+
+		model.setViewName("dashboard");
 
 		return model;
 
@@ -92,11 +92,11 @@ public class MainController {
 
 		String error = "";
 		if (exception instanceof BadCredentialsException) {
-			error = "Invalid username and password!";
+			error = "Email ou mot de passe invalides";
 		} else if (exception instanceof LockedException) {
 			error = exception.getMessage();
 		} else {
-			error = "Invalid username and password!";
+			error = "Email ou mot de passe invalides";
 		}
 
 		return error;

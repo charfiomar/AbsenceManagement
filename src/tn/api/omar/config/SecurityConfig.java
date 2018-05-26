@@ -24,15 +24,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/**")
-		.hasAnyAuthority("USER","ADMIN").and().formLogin().permitAll()
-		.loginPage("/index").failureUrl("/index?error")
-			.defaultSuccessUrl("/hello")
-			.usernameParameter("username")
-			.passwordParameter("password")
-			.and().logout().logoutSuccessUrl("/index?logout")
-			.and().csrf()
-			.and().exceptionHandling().accessDeniedPage("/403");
+		http.authorizeRequests()
+		.antMatchers("/index","/assets/**").permitAll()
+		.antMatchers("/dashboard").hasAnyAuthority("ADMIN","USER")
+		.antMatchers("/**/**").hasAuthority("ADMIN")
+		.and().formLogin().loginPage("/index")
+		.failureUrl("/index?error").defaultSuccessUrl("/dashboard")
+		.usernameParameter("username").passwordParameter("password")
+		.and().csrf()
+		.and().exceptionHandling().accessDeniedPage("/403");
+		/*
+		http.authorizeRequests().antMatchers("/**").hasAnyAuthority("USER", "ADMIN").and().formLogin().permitAll()
+				.loginPage("/index").failureUrl("/index?error").defaultSuccessUrl("/hello")
+				.usernameParameter("username").passwordParameter("password").and().csrf().and().exceptionHandling()
+				.accessDeniedPage("/403");*/
 	}
 
 	@Override
