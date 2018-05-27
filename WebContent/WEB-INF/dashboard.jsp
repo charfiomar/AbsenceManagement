@@ -25,16 +25,7 @@
 		</div>
 	</div>
 	<%@include file="includes/js.jsp"%>
-	<script>
-		$(document).ready(function() {
-			$('#calendar').fullCalendar({
-				defaultView : 'basicWeek'
-			});
-			$('#logout').click(function() {
-				$('#logoutForm').submit();
-			});
-		});
-	</script>
+	<%@include file="includes/fullcalendar.js.jsp" %>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
 	<script

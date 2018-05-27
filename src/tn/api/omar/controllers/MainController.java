@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import tn.api.omar.util.FullCalendarEventInitializer;
+
 @Controller
 public class MainController {
 
@@ -85,6 +87,15 @@ public class MainController {
 
 	}
 
+	@RequestMapping(value = "/fullcalendarbuild", method = RequestMethod.GET)
+	public ModelAndView fullCalendarBuilder() {
+
+		ModelAndView model = new ModelAndView();
+		model.addObject("data", FullCalendarEventInitializer.buildCalendarEvents());
+		model.setViewName("fullcalendar");
+		return model;
+
+	}
 	// customize the error message
 	private String getErrorMessage(HttpServletRequest request, String key) {
 

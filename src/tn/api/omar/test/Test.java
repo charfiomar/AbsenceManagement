@@ -1,5 +1,7 @@
 package tn.api.omar.test;
 
+import tn.api.omar.util.FullCalendarEventInitializer;
+
 public class Test {
 
 	public static void main(String[] args) {
@@ -14,6 +16,7 @@ public class Test {
 		// SessionDAO.addSession(new Session(new Time(8,30,0),new
 		// Time(8,30,0),"Tuesday"));
 		// CourseSessionDAO.addCourseSession(new CourseSession(1, 1, 1, 1, 1));
+		System.out.println(FullCalendarEventInitializer.buildCalendarEvents());
 	}
 
 }

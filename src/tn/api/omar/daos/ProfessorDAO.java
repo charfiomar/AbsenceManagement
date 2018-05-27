@@ -33,7 +33,9 @@ public class ProfessorDAO {
 		Professor p = null;
 		try {
 			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
+			HibernateUtils.session.get().beginTransaction();
 			p = (Professor) HibernateUtils.session.get().get(Professor.class, id);
+			HibernateUtils.session.get().getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new Professor();
