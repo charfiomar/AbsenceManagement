@@ -1,7 +1,5 @@
 package tn.api.omar.entities;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -14,10 +12,6 @@ import tn.api.omar.entities.embeddable.CourseSessionEmbeddedPK;
 public class CourseSession {
 
 	@EmbeddedId
-	@AttributeOverrides({ @AttributeOverride(name = "pid", column = @Column(name = "pid")),
-			@AttributeOverride(name = "gid", column = @Column(name = "gid")),
-			@AttributeOverride(name = "crid", column = @Column(name = "crid")),
-			@AttributeOverride(name = "sid", column = @Column(name = "sid")) })
 	private CourseSessionEmbeddedPK csid;
 
 	@Column(name = "subid")

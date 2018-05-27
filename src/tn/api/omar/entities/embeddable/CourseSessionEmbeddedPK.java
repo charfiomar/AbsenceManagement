@@ -2,6 +2,7 @@ package tn.api.omar.entities.embeddable;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
@@ -9,9 +10,16 @@ public class CourseSessionEmbeddedPK implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	@Column(name = "pid")
 	protected Integer pid;
+	
+	@Column(name = "gid")
 	protected Integer gid;
+	
+	@Column(name = "crid")
 	protected Integer crid;
+	
+	@Column(name = "sid")
 	protected Integer sid;
 	
 	public CourseSessionEmbeddedPK() {

@@ -14,7 +14,15 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-10 mt-5">
-			<a href="<c:url value='/courseSession/add'/>"><button class="btn btn-success mb-2">Ajouter <i class="fa fa-plus"></i></button></a>
+				<%if(request.getParameter("exception")!=null){%>
+					<div class="alert alert-danger text-center" role="alert">
+  						Une erreur est survenue, le créneau ne peut pas être planifié faute de chevauchement horaire.
+					</div>
+				<%}%>
+				<a href="<c:url value='/courseSession/add'/>"><button
+						class="btn btn-success mb-2">
+						Ajouter <i class="fa fa-plus"></i>
+					</button></a>
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -28,13 +36,14 @@
 					<tbody>
 						<c:forEach items="${list}" var="item">
 							<tr>
-								<td>${item.pid}</td>
-								<td>${item.gid}</td>
-								<td>${item.crid}</td>
-								<td>${item.sid}</td>
+								<td>${item.csid.pid}</td>
+								<td>${item.csid.gid}</td>
+								<td>${item.csid.crid}</td>
+								<td>${item.csid.sid}</td>
 								<td>${item.subid}</td>
-								<td><a href="<c:url value='/courseSession/edit/${item.pid}/${item.gid}/${item.crid}/${item.sid}'/>"><i class="fa fa-edit text-secondary"></i></a></td>
-								<td><a href="<c:url value='/courseSession/delete/${item.pid}/${item.gid}/${item.crid}/${item.sid}'/>"><i class="fa fa-trash text-danger"></i></a></td>
+								<td><a
+									href="<c:url value='/courseSession/delete/${item.csid.pid}/${item.csid.gid}/${item.csid.crid}/${item.csid.sid}'/>"><i
+										class="fa fa-trash text-danger"></i></a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

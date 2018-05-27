@@ -22,14 +22,19 @@ public class Classroom {
 	public Classroom() {
 	}
 
-	public Classroom(Integer crid, String crname) {
+	public Classroom(String crname) {
 		super();
-		this.crid = crid;
 		this.crname = crname;
 	}
 
-	public Classroom(String crname) {
+	public Classroom(Integer crid) {
 		super();
+		this.crid = crid;
+	}
+
+	public Classroom(Integer crid, String crname) {
+		super();
+		this.crid = crid;
 		this.crname = crname;
 	}
 

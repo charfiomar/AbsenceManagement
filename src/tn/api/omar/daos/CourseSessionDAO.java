@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Transaction;
+import org.hibernate.exception.ConstraintViolationException;
 
 import tn.api.omar.config.HibernateUtils;
 import tn.api.omar.entities.CourseSession;
-
 import tn.api.omar.entities.embeddable.CourseSessionEmbeddedPK;
 
 public class CourseSessionDAO {
@@ -29,23 +29,27 @@ public class CourseSessionDAO {
 		return list;
 	}
 
-	public static void addCourseSession(CourseSession obj) {
+	public static boolean addCourseSession(CourseSession obj){
 		Transaction t = null;
 		try {
 			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
 			t = HibernateUtils.session.get().beginTransaction();
-			HibernateUtils.session.get().save(obj);
+			HibernateUtils.session.get().persist(obj);
 			HibernateUtils.session.get().flush();
 			t.commit();
 		} catch (Exception e) {
 			if (t != null) {
 				t.rollback();
 			}
+			if(e instanceof ConstraintViolationException){
+				return false;
+			}
 			e.printStackTrace();
 		}
+		return true;
 	}
 
-	public static void editCourseSession(CourseSession obj) {
+	public static boolean editCourseSession(CourseSession obj){
 		Transaction t = null;
 		try {
 			HibernateUtils.session.set(HibernateUtils.SESSION_FACTORY.getCurrentSession());
@@ -62,8 +66,12 @@ public class CourseSessionDAO {
 			if (t != null) {
 				t.rollback();
 			}
+			if(e instanceof ConstraintViolationException){
+				return false;
+			}
 			e.printStackTrace();
 		}
+		return true;
 	}
 
 	public static void deleteCourseSession(CourseSession obj) {
